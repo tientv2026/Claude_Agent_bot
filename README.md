@@ -38,6 +38,8 @@ Type `/boss <what to build>` in Claude Code. Claude reads your repo, splits the 
 | [Antigravity CLI](https://antigravity.google/docs/getting-started) | install `agy`, then run `agy` once to sign in |
 | Git, Python 3.9+ | |
 
+**Both workers must be signed in once before `/boss` can use them.** See the step-by-step guide: [docs/LOGIN.md](docs/LOGIN.md).
+
 You can run with just one worker. The master plans around whatever `doctor` finds.
 
 New Windows machine? `install/setup-windows.ps1` installs Git, Python, Node and Codex with winget.
@@ -150,7 +152,7 @@ Optional. Put it in `.orch/config.json` (per project) or `~/.orch.json` (global)
 | Symptom | Fix |
 |---|---|
 | `agy` task ends in `timeout` with no output | Older `agy` builds could hang without a TTY. Update `agy`. Meanwhile `retry <id> --agent codex`. |
-| `agy` → `authentication required` | Run `agy` once interactively and sign in. |
+| `agy` → `authentication required` | Run `agy` once interactively and sign in. See [docs/LOGIN.md](docs/LOGIN.md). |
 | `codex` sandbox errors on Windows | Run the project inside WSL, or set codex `"permission": "yolo"` (no sandbox). |
 | `Python was not found` on Windows | That's the Microsoft Store alias. Install real Python: `winget install -e --id Python.Python.3.12`. |
 | merge says `conflict` | `orch.py rebase <id>`, or resolve in the worktree and merge again. |

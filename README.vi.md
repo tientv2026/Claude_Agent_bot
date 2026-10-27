@@ -20,6 +20,8 @@ Anh gõ `/boss <việc cần làm>` trong Claude Code. Claude đọc dự án, c
 - [Antigravity CLI](https://antigravity.google/docs/getting-started): cài `agy`, rồi gõ `agy` một lần để đăng nhập.
 - Git và Python 3.9 trở lên.
 
+**Phải đăng nhập Codex và Antigravity một lần trước khi dùng `/boss`.** Hướng dẫn từng bước có ở [docs/LOGIN.vi.md](docs/LOGIN.vi.md).
+
 Có một worker cũng chạy được, master sẽ chỉ giao việc cho worker mà lệnh `doctor` tìm thấy.
 
 Nếu máy Windows chưa cài gì: chạy `install/setup-windows.ps1`, script sẽ cài Git, Python, Node và Codex bằng winget.

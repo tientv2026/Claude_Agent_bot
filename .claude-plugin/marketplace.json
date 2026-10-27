@@ -1,0 +1,11 @@
+{
+  "name": "agent-boss",
+  "owner": { "name": "Tien" },
+  "plugins": [
+    {
+      "name": "agent-boss",
+      "source": "./",
+      "description": "Master agent: Claude plans and reviews, Codex + Antigravity code in parallel."
+    }
+  ]
+}

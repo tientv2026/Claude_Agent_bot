@@ -1,0 +1,19 @@
+{
+  "name": "agent-boss",
+  "displayName": "Agent Boss",
+  "version": "1.1.0",
+  "description": "Turn Claude Code into a master agent that splits work into tasks and runs Codex CLI and Antigravity CLI in parallel git worktrees, then reviews, retries and merges.",
+  "author": {
+    "name": "Tien"
+  },
+  "license": "MIT",
+  "keywords": [
+    "orchestration",
+    "multi-agent",
+    "codex",
+    "antigravity",
+    "git-worktree"
+  ],
+  "homepage": "https://github.com/tientv2026/Claude_Agent_bot",
+  "repository": "https://github.com/tientv2026/Claude_Agent_bot"
+}

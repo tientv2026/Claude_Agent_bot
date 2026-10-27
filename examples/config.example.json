@@ -1,0 +1,29 @@
+{
+  "verify_cmd": "",
+  "agents": {
+    "codex": {
+      "bin": "codex",
+      "model": null,
+      "permission": "auto",
+      "extra_args": [],
+      "max_parallel": 2,
+      "timeout_min": 30
+    },
+    "antigravity": {
+      "bin": "agy",
+      "model": null,
+      "effort": null,
+      "permission": "auto",
+      "extra_args": [],
+      "max_parallel": 2,
+      "timeout_min": 30
+    },
+    "claude": {
+      "bin": "claude",
+      "model": null,
+      "permission": "auto",
+      "max_parallel": 1,
+      "timeout_min": 30
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "context": "WordPress theme 'acme' (PHP 8.2, no build step for PHP). Frontend assets in assets/ built with Vite + Tailwind (npm run build). Follow WordPress Coding Standards; escape all output; text domain 'acme'.",
+  "tasks": [
+    {
+      "id": "contact-endpoint",
+      "agent": "codex",
+      "title": "REST endpoint for the contact form",
+      "prompt": "Register POST /wp-json/acme/v1/contact in inc/rest-contact.php. Fields: name (required), email (required, is_email), message (required, max 2000 chars). Verify the wp_rest nonce, rate-limit to 5 requests per IP per hour with a transient, send with wp_mail() to get_option('admin_email'). Return {ok:true} or a WP_Error with status 400/429. Require the file from functions.php is NOT your job - the master wires it.",
+      "files": ["inc/rest-contact.php"],
+      "do_not_touch": ["functions.php", "assets/"],
+      "acceptance": ["php -l inc/rest-contact.php passes", "Invalid email returns 400", "6th request in an hour returns 429"]
+    },
+    {
+      "id": "contact-ui",
+      "agent": "antigravity",
+      "title": "Contact section + form UI",
+      "prompt": "Create template-parts/contact.php: a responsive two-column contact section (left: heading, short text, address/phone placeholders; right: the form). Tailwind classes only. Add assets/js/contact.js that submits the form with fetch() to /wp-json/acme/v1/contact, sends the X-WP-Nonce header from window.acmeContact.nonce, shows inline field errors and a success message, and disables the button while sending. Accessible labels, aria-live for messages.",
+      "files": ["template-parts/contact.php", "assets/js/contact.js"],
+      "do_not_touch": ["inc/", "functions.php"],
+      "acceptance": ["Works at 375px and 1280px", "No console errors", "npm run build passes"]
+    },
+    {
+      "id": "wire-contact",
+      "agent": "codex",
+      "title": "Wire endpoint + assets into the theme",
+      "prompt": "In functions.php require inc/rest-contact.php, enqueue assets/js/contact.js only on pages using template-parts/contact.php, and wp_localize_script it as acmeContact with a wp_rest nonce.",
+      "files": ["functions.php"],
+      "depends_on": ["contact-endpoint", "contact-ui"]
+    }
+  ]
+}

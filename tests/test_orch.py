@@ -184,6 +184,13 @@ class OrchTest(unittest.TestCase):
         self.orch("clean")
         self.assertIn("discarded", self.orch("status").stdout)
 
+    def test_unicode_summary_on_legacy_codepage(self):
+        # Windows pipes default to an ANSI code page; output must not crash on Vietnamese text.
+        self.orch("dispatch", "--agent", "agy", "--id", "u1", "--prompt", "x")
+        self.env["PYTHONIOENCODING"] = "cp1252"
+        r = self.orch("review", "u1")
+        self.assertIn("đã xong ✓", r.stdout)
+
     def test_state_dir_is_git_ignored(self):
         self.orch("dispatch", "--agent", "codex", "--id", "g1", "--prompt", "x")
         self.assertNotIn(".orch", self.git("status", "--porcelain"))

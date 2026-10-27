@@ -18,7 +18,12 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Unit + end-to-end tests (fake workers)
-        run: python -m unittest discover -s tests -v
+        shell: bash
+        run: python -m unittest discover -s tests -v 2>&1 | tee test.log; exit ${PIPESTATUS[0]}
+      - name: Report failures as annotations
+        if: failure()
+        shell: bash
+        run: python tests/annotate.py test.log
       - name: CLI smoke test
         run: python skills/boss/scripts/orch.py --version
 

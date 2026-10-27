@@ -729,7 +729,17 @@ def cmd_clean(args):
     log(f"cleaned {n} tasks")
 
 
+def _utf8_stdio():
+    # Windows pipes default to the ANSI code page (cp1252/cp1258); worker summaries are often non-ASCII.
+    for s in (sys.stdout, sys.stderr):
+        try:
+            s.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
+
 def main():
+    _utf8_stdio()
     ap = argparse.ArgumentParser(prog="orch", description="Master-agent dispatcher: Codex + Antigravity")
     ap.add_argument("--version", action="version", version=f"agent-boss orch {VERSION}")
     sp = ap.add_subparsers(dest="cmd", required=True)

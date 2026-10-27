@@ -15,6 +15,9 @@ import os
 import sys
 import time
 
+for _s in (sys.stdin, sys.stdout):
+    _s.reconfigure(encoding="utf-8")  # real CLIs speak UTF-8 on every OS
+
 agent = os.environ.get("STUB_AGENT", "codex")
 args = sys.argv[1:]
 
@@ -64,7 +67,7 @@ else:
         os.makedirs(p("ui"), exist_ok=True)
         with open(p("ui", f"{tid}.html"), "w", encoding="utf-8") as f:
             f.write(f"<h1>{tid}</h1>\n")
-    reply = f"## SUMMARY\n- Changed: stuff for {tid}\n- How to verify: look\n"
+    reply = f"## SUMMARY\n- Changed: stuff for {tid}\n- How to verify: look\n- Notes: đã xong ✓\n"
 
 if agent == "codex":
     print(json.dumps({"type": "thread.started"}))
